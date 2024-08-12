@@ -4,7 +4,7 @@ import './App.css';
  const CE3 = () => {
   return(
     <div>
-      <p>This is World Functional Component</p>
+      <p>This is was functional componenet</p>
     </div>
   )
  }
