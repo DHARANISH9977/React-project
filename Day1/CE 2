@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
  const C = () => {
-  let myObject={name:"Madras"}
+  let myObject={name:"coimbatore"}
 
   myObject.name="Chennai"
   let array=["a","e","i","o"]
