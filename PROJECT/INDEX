@@ -1,0 +1,39 @@
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import App from './App';
+import Register from './register';
+import Login from './login';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+  <React.StrictMode>
+    <Router>
+      <Routes>
+        <Route path="/Register" element={<Register />} />
+        <Route path="/app" element={<App />} />
+        <Route path="/login" element={<Login />} />
+  
+      </Routes>
+    </Router>
+  </React.StrictMode>
+);
+
+
+INDEX.CSS
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
