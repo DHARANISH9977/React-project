@@ -1,0 +1,96 @@
+import React, { useState } from 'react';
+import './sample.css'; // Import the CSS file
+
+function StudentInformationSystem() {
+  const [students, setStudents] = useState([]);
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+  const [grade, setGrade] = useState('');
+
+  const addStudent = () => {
+    setStudents([...students, { name, age, grade }]);
+    setName('');
+    setAge('');
+    setGrade('');
+  };
+
+  return (
+    <div className="container">
+      <h1>Student Information System</h1>
+      <div className="form">
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="input"
+        />
+        <input
+          type="number"
+          placeholder="Age"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+          className="input"
+        />
+        <input
+          type="text"
+          placeholder="Grade"
+          value={grade}
+          onChange={(e) => setGrade(e.target.value)}
+          className="input"
+        />
+        <button onClick={addStudent} className="button">Add Student</button>
+      </div>
+      <h2>Student List</h2>
+      <ul className="list">
+        {students.map((student, index) => (
+          <li key={index} className="listItem">
+            {student.name} - {student.age} years old - Grade: {student.grade}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default StudentInformationSystem;
+
+second.css
+
+.container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .form {
+    margin-bottom: 20px;
+  }
+  
+  .input {
+    padding: 10px;
+    margin: 5px;
+    width: calc(100% - 22px);
+  }
+  
+  .button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .listItem {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
