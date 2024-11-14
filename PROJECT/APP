@@ -1,0 +1,271 @@
+import React, { useState } from 'react';
+import './App.css'; 
+
+function Navbar() {
+  return (
+    <nav>
+      <ul>
+    
+      <h1>Welcome</h1>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#order">Order</a></li>
+  
+    
+      </ul>
+    </nav>
+  );
+}
+
+function ProductList({ products, total, onRemove }) { 
+  return (
+    <div className="product-list">
+      <h2>Products</h2>
+      <ul>
+        {products.map((product, index) => (
+          <li key={index}>
+            {product.name} - ₹{product.price} x {product.quantity} kg = ₹{product.total}
+            <button onClick={() => onRemove(index)}>Remove</button>
+          </li>
+        ))}
+      </ul>
+      <h2>Total: ₹{total}</h2>
+    </div>
+  );
+}
+
+function App() {
+  const [products, setProducts] = useState([]);//array
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState('');
+  const [quantity, setQuantity] = useState('');//hook
+  const [customerId ] = useState('');
+  const [customerName] = useState('');
+
+  function addProduct() {
+    const newProduct = {
+      name,
+      price: parseFloat(price), 
+      quantity: parseFloat(quantity),
+      total: parseFloat(price) * parseFloat(quantity),
+      customerId,
+      customerName,
+    };
+    setProducts([...products, newProduct]); //add product to existing list .. expand an elements
+    setName('');
+    setPrice('');
+    setQuantity('');
+
+    }
+
+  function getTotal() {
+    return products.reduce((sum, product) => sum + product.total, 0);
+  }
+
+  function removeProduct(index) {
+    const updatedProducts = products.filter((_, i) => i !== index); //i=position of item in list /// index=positoon of item to remove    every item whose position is not equal to the one you want to remove 
+    setProducts(updatedProducts);
+  }
+
+  return (
+    <div className="app-container">
+      <Navbar />
+      <br />
+      <br />
+      <center>
+        <h1>Star Departmental Store</h1>
+      </center>
+      <div className="customer-box">
+        <br/>
+        <center>
+          <input
+            type="text"
+            placeholder="Customer ID"
+          />
+          <br />
+          <input
+            type="text"
+            placeholder="Customer Name"
+            
+          />
+        </center>
+        
+          <center>
+            <input
+              type="text"
+              placeholder="Product Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)} //e.target.value GET NEW TEXT YOU TYPE
+            />
+            <br />
+            <input
+              type="number"
+              placeholder="Price"
+              value={price} //SHOW WHATEVEER IT PRICE BOX
+              onChange={(e) => setPrice(e.target.value)}// UPDATE THE PRICE VARIABLE 
+            />
+            <br />
+            <input
+              type="number"
+              placeholder="Quantity"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+            />
+          </center>
+        
+      </div>
+      <center>
+        <button onClick={addProduct}>Add Product</button>
+      </center>
+      <ProductList products={products} total={getTotal()} onRemove={removeProduct} />
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+
+APP.CSS
+
+
+
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: grey;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  background-color: #4877b9;
+  color: #fff;
+  padding:10 px;
+  text-align: center;
+}
+.h1{
+  color: #dc3545;
+}
+
+nav h1 {
+  margin: 3;
+  font-size: 90px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 90x;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 100px;
+}
+
+nav ul li a {
+  color: #b85959;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #bcafaf;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #333;
+}
+
+.customer-box {
+  margin: 20px 0;
+}
+
+.customer-box input {
+  margin: 5px 0;
+  padding: 10px;
+  border: 1px solid #042929;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.form-container {
+  margin-top: 20px;
+}
+
+.form-container input {
+  margin: 5px 0;
+  padding: 10px;
+  border: 1px solid #3a17d4;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 300px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #72a76f;
+  color: #317815;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #6d0f8d;
+}
+
+.product-list {
+  margin-top: 20px;
+  color:#0f0735;
+}
+
+.product-list h2 {
+  margin-bottom: 20px;
+}
+
+.product-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.product-list ul li {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-list button {
+  background-color: #dc3545;
+  border: none;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.product-list button:hover {
+  background-color: #00295f;
+}
